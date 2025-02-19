@@ -1,2 +1,0 @@
-# theja01
-GenAI

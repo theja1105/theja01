@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        #fact {
+            font-size: 24px;
+            margin: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .fade-in {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Fun Facts</h1>
+    <div id="fact">Click the button to see a fun fact!</div>
+    <button id="factButton">Show Random Fact</button>
+    <button id="shareButton">Share on Twitter</button>
+
+    <script>
+        const facts = [
+            "Bananas are berries, but strawberries aren't.",
+            "Honey never spoils.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "Octopuses have three hearts.",
+            "Wombat poop is cube-shaped."
+        ];
+
+        const factElement = document.getElementById('fact');
+        const factButton = document.getElementById('factButton');
+        const shareButton = document.getElementById('shareButton');
+
+        factButton.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const randomFact = facts[randomIndex];
+            factElement.textContent = randomFact;
+            factElement.classList.remove('fade-in');
+            void factElement.offsetWidth; // Trigger reflow
+            factElement.classList.add('fade-in');
+        });
+
+        shareButton.addEventListener('click', () => {
+            const factToShare = factElement.textContent;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(factToShare)}`;
+            window.open(twitterUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
+
